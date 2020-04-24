@@ -1,10 +1,10 @@
 import React from 'react';
-import { Route, BrowserRouter } from "react-router-dom";
+import { Route } from "react-router-dom";
 import './App.css';
 import Header from './components/Header/Header';
 import Navbar from './components/Navbar/Navbar';
-import Convertor from './components/Convertor/Convertor';
-import RateList from './components/RateList/RateList';
+import RateListContainer from './components/RateList/RateListContainer';
+import ConvertorContainer from './components/Convertor/ConvertorContainer';
 
 
 const App = props =>  {
@@ -15,8 +15,8 @@ const App = props =>  {
         
       <div className="app-wrapper-content">
             
-        <Route path="/convertor" render={() => <Convertor />} />
-        <Route path="/ratelist" render={() => <RateList />} />
+        <Route path="/convertor" render={() => <ConvertorContainer />} />
+        <Route path="/ratelist" render={() => <RateListContainer />} />
        
 
       </div>

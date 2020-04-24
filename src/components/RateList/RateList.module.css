@@ -1,5 +1,6 @@
 .rateList {
+  display: grid;
   border: 2px solid yellow;
-  text-align: center;
-  height: 40px;
+
 }
+

@@ -4,19 +4,16 @@ const SET_CURRENCIES = "SET_CURRENCIES"
 
 let initialState = {
   currencies: [
-    "EUR",
-    "USD",
-    "RUB"
+    // "EUR",
+    // "USD",
+    // "RUB",
   ],
 };
 
 const currenciesReducer = (state = initialState, action) => {
   switch (action.type) {
     case SET_CURRENCIES:
-      return {
-        ...state,
-        currencies: action.currencies
-      }
+      return { ...state, currencies: action.currencies }
     default:
       return state;
   }
@@ -24,9 +21,11 @@ const currenciesReducer = (state = initialState, action) => {
 
 export const setCurrencies = (currencies) => ({ type: SET_CURRENCIES, currencies });
 
-export const requestCurrencies = () => async (dispatch) => {
-  let data = await currenciesAPI.getAvaibleCurrencies();
-  dispatch(setCurrencies(data.currencies));
+export const requestCurrencies = () => (dispatch) => {
+  currenciesAPI.getAvaibleCurrencies().then(response => {
+    dispatch(setCurrencies(response))
+  })
+
 };
 
 export default currenciesReducer

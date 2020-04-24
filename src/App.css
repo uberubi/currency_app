@@ -14,5 +14,4 @@
 .app-wrapper-content {
   grid-area: c;
   border: 2px solid blue;
-  height: 80px;
 }
