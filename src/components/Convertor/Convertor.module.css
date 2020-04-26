@@ -2,3 +2,9 @@
   border: 2px solid pink;
   text-align: center;
 }
+
+.exchange {
+  display: grid;
+  border:2px solid brown;
+  grid-template-columns: 2fr 2fr;
+}

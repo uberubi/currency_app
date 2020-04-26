@@ -2,15 +2,17 @@ import React from 'react'
 import { compose } from 'redux'
 import RateList from './RateList'
 import { connect } from 'react-redux'
-import { requestCurrencies } from '../../redux/currencies-reducer'
+import { getCurrencies, addFavoriteCurrency, removeFavoriteCurrency } from '../../redux/currencies-reducer'
 
 
 class RateListContainer extends React.Component {
   
+
   componentDidMount() {
-    this.props.requestCurrencies()
+    this.props.getCurrencies()
   }
-  
+
+
   render() {
     return <RateList {...this.props} />
   }
@@ -18,10 +20,12 @@ class RateListContainer extends React.Component {
 
 let mapStateToProps = (state) => {
   return {
-    currencies: state.currencies.currencies
+    currencies: state.currencies.currencies,
+    lastUpdate: state.currencies.lastUpdate,
+    favoriteCurrencies: state.currencies.favoriteCurrencies
   }
 }
 
 
 export default compose(
-  connect(mapStateToProps, { requestCurrencies })(RateListContainer))
+  connect(mapStateToProps, { getCurrencies, addFavoriteCurrency, removeFavoriteCurrency })(RateListContainer))
