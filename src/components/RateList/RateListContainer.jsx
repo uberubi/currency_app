@@ -1,31 +1,31 @@
-import React from 'react'
-import { compose } from 'redux'
-import RateList from './RateList'
-import { connect } from 'react-redux'
-import { getCurrencies, addFavoriteCurrency, removeFavoriteCurrency } from '../../redux/currencies-reducer'
+import React, { useEffect } from "react";
+import { compose } from "redux";
+import RateList from "./RateList";
+import { connect } from "react-redux";
+import {
+  getCurrencies,
+  addFavoriteCurrency,
+  removeFavoriteCurrency,
+} from "../../redux/currencies-reducer";
 
+const RateListContainer = (props) => {
+  useEffect(() => {
+      props.getCurrencies();
+  }, []);
 
-class RateListContainer extends React.Component {
-  
-
-  componentDidMount() {
-    this.props.getCurrencies()
-  }
-
-
-  render() {
-    return <RateList {...this.props} />
-  }
-}
+  return <RateList {...props} />;
+};
 
 let mapStateToProps = (state) => {
   return {
     currencies: state.currencies.currencies,
     lastUpdate: state.currencies.lastUpdate,
-    favoriteCurrencies: state.currencies.favoriteCurrencies
-  }
-}
-
+    favoriteCurrencies: state.currencies.favoriteCurrencies,
+  };
+};
 
 export default compose(
-  connect(mapStateToProps, { getCurrencies, addFavoriteCurrency, removeFavoriteCurrency })(RateListContainer))
+  connect(mapStateToProps, { getCurrencies, addFavoriteCurrency, removeFavoriteCurrency })(
+    RateListContainer
+  )
+);

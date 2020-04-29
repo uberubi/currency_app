@@ -1,27 +1,26 @@
-import React from 'react'
-import { compose } from 'redux'
-import { connect } from 'react-redux'
-import { getCurrencies } from '../../redux/currencies-reducer'
-import Convertor from './Convertor'
+import React, { useEffect } from "react";
+import { compose } from "redux";
+import { connect } from "react-redux";
+import { getConvertorList, setInputCurrency, setCurrencyFrom, setCurrencyTo } from "../../redux/convertor-reducer";
+import Convertor from "./Convertor";
 
+const ConvertorContainer = (props) => {
+ 
+  useEffect(() => {
+    props.getConvertorList();
+  }, []);
 
-class ConvertorContainer extends React.Component {
-  
-  componentDidMount() {
-    this.props.getCurrencies()
-  }
-  
-  render() {
-    return <Convertor {...this.props} />
-  }
-}
+  return <Convertor {...props} />;
+};
 
 let mapStateToProps = (state) => {
   return {
-    currencies: state.currencies.currencies
-  }
-}
+    currencies: state.convertor.currencies,
+    inputCurrency: state.convertor.inputCurrency,
+    outputCurrency: state.convertor.outputCurrency,
+    currencyFrom: state.convertor.currencyFrom,
+    currencyTo: state.convertor.currencyTo
+  };
+};
 
-
-export default compose(
-  connect(mapStateToProps, { getCurrencies })(ConvertorContainer))
+export default compose(connect(mapStateToProps, { getConvertorList, setInputCurrency, setCurrencyFrom, setCurrencyTo })(ConvertorContainer));
