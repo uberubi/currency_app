@@ -9,9 +9,8 @@ import {
 } from "../../redux/currencies-reducer";
 
 const RateListContainer = (props) => {
-  useEffect(() => {
-      props.getCurrencies();
-  }, []);
+  
+  useEffect(() =>  props.getCurrencies(), []);
 
   return <RateList {...props} />;
 };

@@ -14,7 +14,8 @@ let initialState = {
 const currenciesReducer = (state = initialState, action) => {
   switch (action.type) {
     case SET_CURRENCIES:
-      return { ...state, currencies: Object.values([...action.currencies, ...state.currencies].reduce((acc, n) => (!acc[n.ID] && (acc[n.ID] = n), acc), {})) };
+      return { ...state, currencies: action.currencies };
+      // return { ...state, currencies: Object.values([...action.currencies, ...state.currencies].reduce((acc, n) => (!acc[n.ID] && (acc[n.ID] = n), acc), {})) };
     case SET_LAST_UPDATE:
       return { ...state, lastUpdate: action.date };
     case ADD_FAVORITE_CURRENCY:

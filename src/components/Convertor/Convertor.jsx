@@ -1,78 +1,96 @@
-import React, { useState, useEffect } from "react";
-import styles from "./Convertor.module.css";
+import React, { useState } from "react";
+import { toConvert } from "../../utils/convertion";
+import { Jumbotron, Form, Container, Row, Col } from "react-bootstrap";
 
 const Convertor = (props) => {
-  
-  let [currenciesList, setCurrencyList] = useState(props.currencies);
+  let [currenciesList] = useState(props.currencies);
   let [inputCurrency, setInputCurrency] = useState(props.inputCurrency);
   let [outputCurrency, setOutputCurrency] = useState(props.outputCurrency);
   let [currencyFrom, setCurrencyFrom] = useState(props.currencyFrom);
   let [currencyTo, setCurrencyTo] = useState(props.currencyTo);
-
-  // useEffect( () => {
-  //   setInputCurrency(0)
-  //   setOutputCurrency(0)
-  // }, [props.inputCurrency, props.outputCurrency] )
+  let [isCurrencyFromSelected, setIsCurrencyFromSelected] = useState(false);
+  let [isCurrencyToSelected, setIsCurrencyToSelected] = useState(false);
 
   const onInputChange = (e) => {
-    setInputCurrency(e.currentTarget.value)
-    setOutputCurrency(toConvert(currencyFrom, currencyTo, e.currentTarget.value, currenciesList)) 
+    setInputCurrency(e.currentTarget.value);
+    setOutputCurrency(toConvert(currencyFrom, currencyTo, e.currentTarget.value, currenciesList));
   };
-console.log(currencyFrom)
-console.log(currencyTo)
 
-  const toConvert = (curFromName, curToName, curFromNumber, currenciesList) => {
-    let currencyRateFrom = currenciesList.find(c => c.Name === curFromName).Value
-    let currencyRateTo = currenciesList.find(c => c.Name === curToName).Value
-    let curToNumber = curFromNumber / (currencyRateTo / currencyRateFrom)
-    return curToNumber
-  }
-
-  // const onOutputChange = (e) => {
-  //   setOutputCurrency(e.currentTarget.value);
-  // };
-
+  console.log("convertor rerender");
   const onOptionChangeFrom = (e) => {
+    setIsCurrencyFromSelected(true);
+    setInputCurrency(0);
+    setOutputCurrency(0);
     setCurrencyFrom(e.currentTarget.value);
   };
 
   const onOptionChangeTo = (e) => {
+    setIsCurrencyToSelected(true);
+    setInputCurrency(0);
+    setOutputCurrency(0);
     setCurrencyTo(e.currentTarget.value);
   };
-
 
   let currenciesElement = props.currencies.map((currency) => (
     <option key={currency.CharCode}>{currency.Name}</option>
   ));
 
   return (
-    <div className={styles.convertor}>
-      <div className={styles.exchange}>
-        <div>
-          <div>
-            <select onChange={onOptionChangeFrom}>
-              <option disabled defaultValue >Выберите валюту</option>
-              {currenciesElement}
-            </select>
-          </div>
-          <div>
-            <input value={inputCurrency} onChange={onInputChange}></input>
-          </div>
-        </div>
-
-        <div>
-          <div>
-            <select onChange={onOptionChangeTo} >
-              <option disabled selected >Выберите валюту</option>
-              {currenciesElement}
-            </select>
-          </div>
-          <div>
-            <input value={outputCurrency}  readOnly></input>
-          </div>
-        </div>
-      </div>
-    </div>
+    <Jumbotron>
+      <Container>
+        <Row>
+          <Col>
+            <Form>
+              <Form.Group>
+                <Form.Label>
+                  <h3>FROM</h3>
+                </Form.Label>
+                <Form.Control
+                  as="select"
+                  onChange={onOptionChangeFrom}
+                  defaultValue="Выберите валюту"
+                >
+                  <option disabled>Выберите валюту</option>
+                  <option>Российский Рубль</option>
+                  {currenciesElement}
+                </Form.Control>
+              </Form.Group>
+              <Form.Group>
+                <Form.Control
+                  as="input"
+                  type="number"
+                  disabled={!(isCurrencyFromSelected && isCurrencyToSelected)}
+                  min="0"
+                  value={inputCurrency}
+                  onChange={onInputChange}
+                />
+              </Form.Group>
+            </Form>
+          </Col>
+          <Col>
+            <Form>
+              <Form.Group>
+                <Form.Label>
+                  <h3>TO</h3>
+                </Form.Label>
+                <Form.Control
+                  as="select"
+                  onChange={onOptionChangeTo}
+                  defaultValue="Выберите валюту"
+                >
+                  <option disabled>Выберите валюту</option>
+                  <option>Российский Рубль</option>
+                  {currenciesElement}
+                </Form.Control>
+              </Form.Group>
+              <Form.Group>
+                <Form.Control as="input" value={outputCurrency} disabled={true} readOnly />
+              </Form.Group>
+            </Form>
+          </Col>
+        </Row>
+      </Container>
+    </Jumbotron>
   );
 };
 

@@ -8,8 +8,8 @@ const SET_CURRENCY_TO = "SET_CURRENCY_TO";
 
 let initialState = {
   currencies: [],
-  inputCurrency: "INPUT",
-  outputCurrency: "OUTPUT",
+  inputCurrency: '0',
+  outputCurrency: '0',
   currencyFrom: "USD",
   selectedCurOutput: "EUR",
 };

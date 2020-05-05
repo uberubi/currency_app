@@ -5,7 +5,6 @@ import { getConvertorList, setInputCurrency, setCurrencyFrom, setCurrencyTo } fr
 import Convertor from "./Convertor";
 
 const ConvertorContainer = (props) => {
- 
   useEffect(() => {
     props.getConvertorList();
   }, []);
