@@ -2,21 +2,20 @@ import React, { useState } from "react";
 import { toConvert } from "../../utils/convertion";
 import { Jumbotron, Form, Container, Row, Col } from "react-bootstrap";
 
-const Convertor = (props) => {
-  let [currenciesList] = useState(props.currencies);
-  let [inputCurrency, setInputCurrency] = useState(props.inputCurrency);
-  let [outputCurrency, setOutputCurrency] = useState(props.outputCurrency);
-  let [currencyFrom, setCurrencyFrom] = useState(props.currencyFrom);
-  let [currencyTo, setCurrencyTo] = useState(props.currencyTo);
+const Convertor = ({currencies}) => {
+  
+  let [inputCurrency, setInputCurrency] = useState(0);
+  let [outputCurrency, setOutputCurrency] = useState(0);
+  let [currencyFrom, setCurrencyFrom] = useState('');
+  let [currencyTo, setCurrencyTo] = useState('');
   let [isCurrencyFromSelected, setIsCurrencyFromSelected] = useState(false);
   let [isCurrencyToSelected, setIsCurrencyToSelected] = useState(false);
 
   const onInputChange = (e) => {
     setInputCurrency(e.currentTarget.value);
-    setOutputCurrency(toConvert(currencyFrom, currencyTo, e.currentTarget.value, currenciesList));
+    setOutputCurrency(toConvert(currencyFrom, currencyTo, e.currentTarget.value, currencies));
   };
 
-  console.log("convertor rerender");
   const onOptionChangeFrom = (e) => {
     setIsCurrencyFromSelected(true);
     setInputCurrency(0);
@@ -31,10 +30,10 @@ const Convertor = (props) => {
     setCurrencyTo(e.currentTarget.value);
   };
 
-  let currenciesElement = props.currencies.map((currency) => (
+  let currenciesElement = currencies.map((currency) => (
     <option key={currency.CharCode}>{currency.Name}</option>
   ));
-
+ 
   return (
     <Jumbotron>
       <Container>

@@ -45,5 +45,11 @@ export const getCurrencies = () => (dispatch) => {
     dispatch(setLastUpdate(date));
   });
 };
+// export const getCurrencies = () => async (dispatch) => {
+//   let response = await currenciesAPI.getAvaibleCurrencies()
+//     let date = new Date(response.data.Timestamp).toLocaleString();
+//     dispatch(setCurrencies(Object.values(response.data.Valute)));
+//     dispatch(setLastUpdate(date));
+// };
 
 export default currenciesReducer;

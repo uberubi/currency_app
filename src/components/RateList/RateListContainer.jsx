@@ -8,9 +8,9 @@ import {
   removeFavoriteCurrency,
 } from "../../redux/currencies-reducer";
 
-const RateListContainer = (props) => {
+const RateListContainer = ({getCurrencies, ...props}) => {
   
-  useEffect(() =>  props.getCurrencies(), []);
+  useEffect(() =>  getCurrencies(), [getCurrencies]);
 
   return <RateList {...props} />;
 };
