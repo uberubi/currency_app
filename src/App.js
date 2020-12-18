@@ -1,24 +1,23 @@
-import React from "react";
-import { Route, Switch, Redirect } from "react-router-dom";
-import "./App.css";
+// import "./App.scss";
+import { BrowserRouter as Router, Route } from "react-router-dom";
+import Home from "./pages/Home/Home";
+import Convertor from "./pages/Convertor/Convertor";
+import { Provider } from "react-redux";
+import store from "./redux/store";
 import Header from "./components/Header/Header";
-import RateListContainer from "./components/RateList/RateListContainer";
-import ConvertorContainer from "./components/Convertor/ConvertorContainer";
-import { Container, Jumbotron } from "react-bootstrap";
+import styles from './App.module.scss'
 
-const App = (props) => {
+const App = () => {
   return (
-    <Container>
-      <Header />
-      <Jumbotron>
-        <Switch>
-          <Route exact path="/" render={() => <Redirect to={"/ratelist"}/> } />
-          <Route path="/convertor" render={() => <ConvertorContainer />} />
-          <Route path="/ratelist" render={() => <RateListContainer />} />
-          <Route path='*'render={() => <div>404 NOT FOUND</div>}/>
-        </Switch>
-      </Jumbotron>
-    </Container>
+    <Provider store={store}>
+      <Router>
+        <div className={styles.container}>
+        <Header />
+          <Route exact path="/" component={Home} />
+          <Route exact path="/convertor" component={Convertor} />
+        </div>
+      </Router>
+    </Provider>
   );
 };
 

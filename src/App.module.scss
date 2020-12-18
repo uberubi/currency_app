@@ -1,0 +1,17 @@
+html,
+body {
+  background: #1F2739;
+  font-family: 'Helvetica', sans-serif;
+  color: #A7A1AE;
+  font-weight: 300;
+  line-height: 1.42em;
+  padding: 0;
+  margin: 0;
+}
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0 20%;
+}

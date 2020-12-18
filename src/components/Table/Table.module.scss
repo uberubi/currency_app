@@ -1,0 +1,61 @@
+.container {
+  background: #b3b7b9;
+  border: 4px solid #f9f9f9;
+  padding: 0 20px;
+  
+}
+
+
+.table {
+  display: table;
+  width: 100%;
+  
+  &Caption {
+    display: table-caption;
+    text-align: center;
+    color: black;
+    font-weight: bold;
+  }
+  &Body {
+    display: table-row-group;
+    
+    &Row {
+      display: table-row;
+      &:nth-of-type(even) {
+        background: #323c50;
+      }
+
+      &:nth-of-type(odd) {
+        background: #2c3446;
+      }
+
+      &:hover {
+        background: #464a52;
+      }
+
+      &Cell {
+        display: table-cell;
+        font-weight: normal;
+        border: 1px solid #1f2739;
+        &:first-child {
+          color: #fb667a;
+        }
+        &:last-child {
+          border-right: none;
+        }
+      }
+    }
+
+    @media (max-width: 800px) {
+      .RowCell:nth-child(2) {
+        display: none;
+      }
+    }
+  }
+}
+
+@media (max-width: 800px) {
+  .container {
+    margin: 0;
+  }
+}
